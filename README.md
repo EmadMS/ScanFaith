@@ -53,5 +53,5 @@
 
 ### Clone the Repo
 ```bash
-git clone https://github.com/yourusername/scanfaith.git
+git clone https://github.com/EmadMS/scanfaith.git
 cd scanfaith
