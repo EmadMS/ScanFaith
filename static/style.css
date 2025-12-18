@@ -1,0 +1,103 @@
+/* Dark Mode Glassmorphism Theme */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header { margin-bottom: 20px; margin-top: 10px; }
+.logo { font-size: 2rem; font-weight: bold; background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Scanner */
+.scanner-container {
+    width: 100%;
+    height: 300px;
+    background: black;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #334155;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+#reader { width: 100%; height: 100%; object-fit: cover; }
+
+.overlay-laser {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    animation: scanMove 2s infinite ease-in-out;
+}
+
+@keyframes scanMove {
+    0% { top: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* Manual Input */
+.manual-box { display: flex; gap: 10px; margin-top: 20px; }
+input { flex: 1; padding: 12px; border-radius: 8px; border: none; background: #1e293b; color: white; outline: none; }
+button { padding: 12px 20px; background: #10b981; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+/* Result Modal */
+.modal {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+.hidden { display: none; }
+
+.modal-content {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 20px;
+    width: 85%;
+    border: 1px solid #334155;
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+#status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #334155;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.ing-box {
+    background: #0f172a;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    max-height: 100px;
+    overflow-y: auto;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.close-btn { width: 100%; background: white; color: black; }
