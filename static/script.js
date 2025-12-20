@@ -1,20 +1,38 @@
 const html5QrCode = new Html5Qrcode("reader");
 let isScanning = true;
 
-// 1. Start Camera
+// 1. Start Camera (Updated for Square Box)
 function startScanner() {
+    const config = { 
+        fps: 10, 
+        qrbox: { width: 250, height: 250 }, // Square scanning region
+        aspectRatio: 1.0 
+    };
+    
+    // Try to force the back camera with focus
+    const cameraConfig = { 
+        facingMode: "environment"
+    };
+
     html5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: 250 },
+        cameraConfig, 
+        config, 
         onScanSuccess
-    ).catch(err => console.log("Camera Error:", err));
+    ).catch(err => {
+        console.log("Camera Error:", err);
+    });
 }
 
 // 2. Handle Scan
 function onScanSuccess(decodedText) {
     if (!isScanning) return;
     isScanning = false;
-    html5QrCode.stop().then(() => checkProduct(decodedText));
+    
+    // Stop camera and check product
+    html5QrCode.stop().then(() => checkProduct(decodedText)).catch(err => {
+        // Force check even if stop fails
+        checkProduct(decodedText);
+    });
 }
 
 // 3. Manual Search
@@ -65,9 +83,13 @@ function closeModal() {
     const modal = document.getElementById("result-modal");
     gsap.to(".modal-content", { y: 50, opacity: 0, duration: 0.3, onComplete: () => {
         modal.classList.add("hidden");
+        
         // Reset Text
         document.getElementById("status-badge").innerText = "Scanning...";
         document.getElementById("status-badge").style.background = "#334155";
+        document.getElementById("p-name").innerText = "Product Name";
+        document.getElementById("p-ing").innerText = "Ingredients...";
+        
         // Restart Camera
         isScanning = true;
         startScanner();

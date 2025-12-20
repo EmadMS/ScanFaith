@@ -17,38 +17,59 @@ body {
     padding: 20px;
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 header { margin-bottom: 20px; margin-top: 10px; }
 .logo { font-size: 2rem; font-weight: bold; background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* Scanner */
+/* --- UPDATED SCANNER CSS --- */
 .scanner-container {
-    width: 100%;
-    height: 300px;
+    width: 80%;           /* Responsive width */
+    max-width: 300px;     /* Cap the size */
+    aspect-ratio: 1 / 1;  /* FORCE A SQUARE */
     background: black;
     border-radius: 20px;
     overflow: hidden;
     position: relative;
+    margin: 0 auto;       /* Center it */
     border: 2px solid #334155;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
 }
 
-#reader { width: 100%; height: 100%; object-fit: cover; }
+#reader { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;    /* Fill the square */
+}
+
+/* Visual Aiming Brackets (Optional aesthetic) */
+.scanner-container::after {
+    content: '';
+    position: absolute;
+    top: 15%; left: 15%; right: 15%; bottom: 15%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); /* Dims the outside */
+}
 
 .overlay-laser {
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0; left: 15%; right: 15%;
     height: 2px;
     background: #10b981;
-    box-shadow: 0 0 10px #10b981;
+    box-shadow: 0 0 10px #10b981, 0 0 20px #10b981;
+    z-index: 10;
     animation: scanMove 2s infinite ease-in-out;
 }
 
 @keyframes scanMove {
-    0% { top: 0; opacity: 0; }
-    50% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+    0% { top: 15%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 85%; opacity: 0; }
 }
 
 /* Manual Input */
@@ -100,4 +121,4 @@ button { padding: 12px 20px; background: #10b981; border: none; border-radius: 8
     text-align: left;
 }
 
-.close-btn { width: 100%; background: white; color: black; }
+.close-btn { width: 100%; background: white; color: black; padding: 12px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;}
